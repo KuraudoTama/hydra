@@ -1,0 +1,11 @@
+CHANGES
+=======
+
+* rename travis.yml to .travis.yml
+* add base classes skeletons
+* add initial travis.yml
+* adjust the structure
+* create the initial structure
+* create a clean master branch
+* Create gh-pages branch via GitHub
+* Create gh-pages branch via GitHub

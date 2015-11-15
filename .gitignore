@@ -1,1 +1,4 @@
 .idea/
+.eggs/
+.tox/
+service_integration_engine.egg-info/
