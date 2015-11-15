@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* create README.rst and LICENSE
+* setup needed files for travis and distribution
 * rename travis.yml to .travis.yml
 * add base classes skeletons
 * add initial travis.yml
