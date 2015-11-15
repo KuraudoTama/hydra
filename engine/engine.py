@@ -9,7 +9,6 @@ class Engine(threading.Thread):
         self._action = actions
 
 
-
 if __name__ == '__main__':
     engine = Engine()
     engine.start()
