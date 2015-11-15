@@ -1,0 +1,2 @@
+class BaseAction(object):
+    pass
