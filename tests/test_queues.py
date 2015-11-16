@@ -1,4 +1,5 @@
 import unittest
+
 from engine.queues import inmemory_queue
 from engine.queues import queue_factory
 
