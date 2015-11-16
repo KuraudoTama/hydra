@@ -1,9 +1,11 @@
 from six.moves import queue
 
+from base_queue import BaseQueue
 
-class InMemoryQueue(object):
+
+class InMemoryQueue(BaseQueue):
     def __init__(self, name):
-        self.name = name
+        BaseQueue.__init__(self, name)
         self._queue = queue.Queue()
 
     def put(self, data):
