@@ -1,2 +1,0 @@
-class BaseAction(object):
-    pass
