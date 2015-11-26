@@ -1,8 +1,4 @@
-service-integration-engine
+Hydra
 =========
 
-.. image:: https://travis-ci.org/KuraudoTama/service-integration-engine.svg
-    :target: https://travis-ci.org/KuraudoTama/service-integration-engine
-
-
-A Python-based common service library to link any 2 services together in a IF-THEN manner.
+A Python-based service to provide pipelines to connect any 2 services together.
