@@ -1,0 +1,114 @@
+zmq-address: 'tcp://172.16.1.7:5555'
+
+jenkins_url: http://172.16.1.7:8080/
+jenkins_username: guanjun@cn.ibm.com
+jenkins_password: sm4rtcl0ud
+
+handlers:
+  - jenkins-flow-analyzer
+  - jenkins-slack-publisher
+  - jenkins-job-instances-monitor
+
+bots:
+  - name: bot-joshua
+    token: 'xoxp-4450181546-4472255117-4509631736-e3217a'
+    as-user: true
+
+jenkins-job-instances-monitor:
+  mongo:
+    host: 127.0.0.1
+    port: 27017
+    database: job_instances
+  groups:
+    - build.parameters.CI_INDEX
+    - build.parameters.MGMT_SITE_SELECTION
+
+jenkins-flow-analyzer:
+  slack:
+    name: bot-joshua
+    token: 'xoxp-4450181546-4472255117-4509631736-e3217a'
+    channel: '#jenkins-events'
+    as-user: true
+  flows:
+    - Flow_ER2_CI_Parallel_Deploy
+    - Flow_ER2_CI_Update
+    - Flow_ER2_CI_Refresh
+    - Flow_ER2_CI_Deployment
+    - Flow_ER2_CI_Destroy
+    - Flow_ER2_Pipeline_DevOps
+    - Flow_ER2_Pipeline_ZFIS_Refresh
+    - Flow_ER2_Pipeline_ZFIS_Update
+
+jenkins-slack-publisher:
+  bots:
+    - name: bot-joshua
+      token: 'xoxp-4450181546-4472255117-4509631736-e3217a'
+      as-user: true
+    - name: bot-delivery
+      token: 'xoxp-4275628674-5140437012-12823417633-4bb19fb331'
+      as-user: true
+  rules:
+    - name-pattern: '^(.*)$'
+      match-any:
+        - build.parameters.CI_INDEX: '26'
+        - build.parameters.CI_INDEX: '32'
+        - build.parameters.CI_INDEX: '36'
+        - build.parameters.CI_INDEX: '48'
+      bot: bot-joshua
+      channel: '#jenkins-events'
+
+#    - name-pattern: '^\Flow_ER2_CI_(Parallel_Deploy|Update|Refresh|Deployment|Destroy)$'
+#      match-any:
+#        - build.parameters.CI_INDEX: '26'
+#        - build.parameters.CI_INDEX: '32'
+##        - build.parameters.CI_INDEX: '36'
+#        - build.parameters.CI_INDEX: '48'
+#      bot: bot-joshua
+#      channel: '#jenkins-events'
+
+#    - name-pattern: '^Build_Zenith_(Baremetals|VMs)$'
+#      match-any:
+#        - build.parameters.CI_INDEX: '26'
+#        - build.parameters.CI_INDEX: '32'
+#        - build.parameters.CI_INDEX: '36'
+#        - build.parameters.CI_INDEX: '48'
+#      bot: bot-joshua
+#      channel: '#jenkins-events'
+
+#    - name-pattern: '^\ER2_(.*)_Update$'
+#      match-any:
+#        - build.parameters.CI_INDEX: '26'
+#      bot: bot-joshua
+#      channel: '#jenkins-events'
+
+    - name-pattern: '^(.*)$'
+      match-any:
+        - build.parameters.CI_INDEX: '31'
+        - build.parameters.CI_INDEX: '39'
+      bot: bot-joshua
+      channel: '#monitoring-team'
+
+    - name-pattern: '^(.*)$'
+      match-any:
+        - build.parameters.CI_INDEX: '49'
+        - build.parameters.CI_INDEX: '77'
+        - build.parameters.CI_INDEX: '72'
+        - build.parameters.CI_INDEX: '74'
+        - build.parameters.CI_INDEX: '75'
+      bot: bot-delivery
+      channel: '#delivery-icos-builds'
+
+    - name-pattern: '^(.*)$'
+      match-any:
+        - build.parameters.CI_INDEX: '27'
+        - build.parameters.CI_INDEX: '28'
+        - build.parameters.CI_INDEX: '29'
+        - build.parameters.CI_INDEX: '47'
+        - build.parameters.CI_INDEX: '26'
+        - build.parameters.CI_INDEX: '48'
+      bot: bot-joshua
+      channel: '#testing-ci-deployment'
+
+    - name-pattern: '^\Flow_ER2_Pipeline_(DevOps|ZFIS_Refresh|ZFIS_Update)$'
+      bot: bot-joshua
+      channel: '#jenkins-events'

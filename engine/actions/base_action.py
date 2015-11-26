@@ -1,2 +1,7 @@
 class BaseAction(object):
-    pass
+    def __init__(self, config):
+        raise NotImplementedError
+
+    def do(self):
+        raise NotImplementedError
+

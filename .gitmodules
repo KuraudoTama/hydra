@@ -1,0 +1,3 @@
+[submodule "engine/actions/pyslack"]
+	path = engine/actions/pyslack
+	url = https://github.com/joshuakwan/pyslack

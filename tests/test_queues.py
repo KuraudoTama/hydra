@@ -1,17 +1,17 @@
 import unittest
 
-from engine.queues import inmemory_queue
-from engine.queues import queue_factory
+from engine.queues.inmemory_queue import InMemoryQueue
+from engine.queues.queue_factory import QueueFactory
 
 
 class InMemoryQueueTestRunner(unittest.TestCase):
     def setUp(self):
         self.queue_name = 'in-memory queue'
-        self.queue = queue_factory.QueueFactory.create_inmemory_queue(self.queue_name)
+        self.queue = QueueFactory.create_inmemory_queue(self.queue_name)
 
     def test_create_inmemory_queue(self):
         assert self.queue.name == self.queue_name
-        assert self.queue.__class__ == inmemory_queue.InMemoryQueue
+        assert self.queue.__class__ == InMemoryQueue
         self.assertTrue(self.queue.is_empty(), 'The queue is not initialized as empty')
 
     def test_inmemory_queue_put(self):

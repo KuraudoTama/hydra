@@ -1,17 +1,23 @@
-import threading
+from actions import base_action
 from listeners import base_listener
 from parsers import base_parser
 from rules import rules_engine
-from actions import base_action
 
 
-class Engine(threading.Thread):
-    def __init__(self, listener, parser, rules_engine, actions):
-        threading.Thread.__init__(self, name='Engine')
-        self._listener = listener
-        self._parser = parser
-        self._rules_engine = rules_engine
-        self._action = actions
+class Engine(object):
+    def __init__(self, **params):
+        self._listener = params.get('listener')
+        self._filter = params.get('filter')
+        self._rule_engine = params.get('rule_engine')
+        self._actions = params.get('actions')
+
+    def launch(self):
+        pass
+
+    def terminate(self):
+        pass
+
+
 
 
 if __name__ == '__main__':
@@ -21,6 +27,5 @@ if __name__ == '__main__':
     actions = list()
     actions.append(base_action.BaseAction)
 
-    engine = Engine(listener, parser, rules_engine, actions)
-
+    engine = Engine(l=listener)
     engine.start()
