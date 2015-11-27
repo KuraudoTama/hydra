@@ -10,7 +10,9 @@ def setup_logging():
                                '(%(threadName)-10s) %(message)s')
 
 
-app = Flask('hydra-ui', static_folder='hydra_ui/static/AdminLTE-2.3.0', static_url_path='/static')
+app = Flask('hydra-ui',
+            static_folder='hydra_ui/static/AdminLTE-2.3.0',
+            static_url_path='/static')
 
 
 @app.route('/ui', methods=['GET'])
@@ -21,12 +23,17 @@ def index():
         return template_index.render()
 
 
-@app.route('/ui/pipelines', methods=['GET'])
-def pipeline_view():
+@app.route('/ui/pipelines/<view>', methods=['GET'])
+def pipeline_view(view):
+    env = Environment(loader=PackageLoader('hydra_ui'))
+
     if request.method == 'GET':
-        env = Environment(loader=PackageLoader('hydra_ui'))
-        template_index = env.get_template('template_pipeline.html')
-        return template_index.render()
+        if view == 'list':
+            template_index = env.get_template('template_pipeline.html')
+            return template_index.render()
+        if view == 'create':
+            template_index = env.get_template('template_pipeline_create.html')
+            return template_index.render()
 
 
 if __name__ == "__main__":

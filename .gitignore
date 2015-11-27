@@ -4,3 +4,4 @@
 service_integration_engine.egg-info/
 *.pyc
 *.egg-info/
+.DS_Store
